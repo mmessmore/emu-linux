@@ -1,0 +1,12 @@
+disks:
+  - source: /dev/sdb
+    dest: /dev/sda
+    table: gpt
+    partitions:
+      - type: ext2
+        size: 200MB
+      - type: swap
+        size: 2GB
+      - type: xfs
+        size: 100%FREE
+
