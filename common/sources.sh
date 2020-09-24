@@ -15,3 +15,9 @@ export GMP_URL="https://gmplib.org/download/gmp/gmp-${GMP_VERSION}.tar.xz"
 export MPC_VERSION="1.2.0"
 export MPC_URL="https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VERSION}.tar.gz"
 
+export LINUX_MAJOR="5.x"
+export LINUX_VERSION="5.8.11"
+export LINUX_URL="https://cdn.kernel.org/pub/linux/kernel/v${LINUX_MAJOR}/linux-${LINUX_VERSION}.tar.xz"
+
+export GLIBC_VERSION="2.32"
+export GLIBC_URL="https://ftp.gnu.org/gnu/glibc/glibc-${GLIBC_VERSION}.tar.xz"

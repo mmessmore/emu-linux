@@ -113,6 +113,29 @@ build_gcc() {
 	make
 	make install
 
+	cd ..
+	cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+	  "$(dirname "$("${EMU_TGT}-gcc" -print-libgcc-file-name)")"/install-tools/include/limits.h
+
+}
+
+build_kernel_headers() {
+	title "Fetching Linux Kernel ${LINUX_VERSION}"
+	if ! [ -f "linux-${LINUX_VERSION}.tar.xz" ]; then
+		wget "$LINUX_URL" || bail $? "Couldn't download binutils"
+	fi
+	if ! [ -d "linux-${LINUX_VERSION}" ]; then
+		tar xf "linux-${LINUX_VERSION}.tar.xz" ||
+			bail $? "Couldn't unpack linux"
+	fi
+	cd linux-${LINUX_VERSION} || bail $? "Failed cding to binutils src"
+
+	title "Building Linux Kernel Headers"
+	make mrproper
+	make headers
+	find usr/include -name '.*' -delete
+	rm usr/include/Makefile
+	cp -rv usr/include "${EMU_MNT}/usr"
 }
 
 
@@ -120,5 +143,11 @@ if ! [ -f "${EMU_MNT}/tools/bin/${EMU_TGT}-ld" ]; then
 	( build_binutils ) || bail $? "Couldn't build binutils"
 fi
 
-( build_gcc ) || bail $? "Couldn't build gcc"
+if ! [ -f "${EMU_MNT}/tools/bin/${EMU_TGT}-gcc" ]; then
+	( build_gcc ) || bail $? "Couldn't build gcc"
+fi
+
+if ! [ -f "${EMU_MNT}/usr/include/asm/termios.h" ]; then
+	(build_kernel_headers) || bail $? "Couldn't build Linux Kernel Headers"A
+fi
 
