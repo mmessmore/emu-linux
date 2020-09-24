@@ -1,0 +1,9 @@
+label: gpt
+label-id: 12FF544A-280D-9749-B8CF-37A3A212E804
+device: /dev/sdb
+unit: sectors
+first-lba: 2048
+last-lba: 16777182
+
+/dev/sdb1 : start=        2048, size=    14678016, type=0FC63DAF-8483-4772-8E79-3D69D8477DE4, uuid=EBDF32F8-3C41-904E-A42A-2FF0EA0D5F32
+/dev/sdb2 : start=    14680064, size=     2097119, type=0657FD6D-A4AB-43C4-84E5-0933C84B4F4F, uuid=30BB17B7-8E01-8F41-8A12-C83E707FE28E
